@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "postbuild": "mkdir -p ../web-gen ; rm -rf web-gen/* ; cp -r dist/* ../web-gen ; rm -rf web-gen"
+    "postbuild": "mkdir -p ../web-gen ; rm -rf web-gen/* ; cp -r dist/* ../web-gen ; rm -rf dist"
   },
   "dependencies": {
     "vue": "^2.5.2",

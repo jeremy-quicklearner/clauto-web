@@ -1,8 +1,8 @@
 module.exports = {
-    isDev: function() {
+    isDev() {
         return (typeof webpackHotUpdate != 'undefined')
     },
-    isProd: function() {
+    isProd() {
         return (typeof webpackHotUpdate == 'undefined')
     }
 }

@@ -1,10 +1,11 @@
-import util from '@/util/util.js'
+import util from '@/util'
 
 import Vue from 'vue'
 import Router from 'vue-router'
 
 import LoginPage from '@/views/LoginPage/LoginPage'
-import TheNavbar from '@/components/TheNavbar/TheNavbar'
+import MainPage from '@/views/MainPage/MainPage'
+import UsersPage from '@/views/UsersPage/UsersPage'
 
 Vue.use(Router)
 
@@ -14,18 +15,14 @@ var router = new Router({
             path: '/login',
             name: 'Clauto Login',
             component: LoginPage
-        },
-        {
+        }, {
             path: '/',
             name: 'Clauto',
-            component: TheNavbar,
-            props: {content: {component: 'MainPage', props: {}}}
-        },
-        {
+            component: MainPage
+        }, {
             path: '/users',
             name: 'Clauto Users',
-            component: TheNavbar,
-            props: {content: {component: 'UsersPage', props: {}}}
+            component: UsersPage
         }
     ],
     mode: 'history'
@@ -41,6 +38,6 @@ var nameToTitle = function (name) {
 router.beforeEach((to, from, next) => {
     document.title = nameToTitle(to.name);
     next();
-  })
+})
   
 export default router

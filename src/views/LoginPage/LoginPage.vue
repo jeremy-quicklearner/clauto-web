@@ -1,11 +1,45 @@
 <template>
     <div id="LoginPage">
         <p>Clauto login page</p>
+        <form name="LoginForm">
+            <input type="text" name="username" v-model="input.username" placeholder="Username" />
+            <input type="password" name="password" v-model="input.password" placeholder="Password" />
+            <button type="button" v-on:click="login">Login</button>
+        </form>
+        <p v-if="loginFailed">Login Failed: {{ loginFailReason }}</p>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'LoginPage'
-}
+    import apiUser from '@/api/user'
+
+    export default {
+        name: 'LoginPage',
+        data() { return {
+            input: {
+                username: '',
+                password: ''
+            },
+            loginFailReason: ''
+        }},
+        methods: {
+            onLoginFail(response) {
+                this.loginFailReason = response.data;
+            },
+            login() {
+                this.loginFailReason = '';
+                this.$store.dispatch('session/login', {
+                    username: this.input.username,
+                    password: this.input.password,
+                    onFail: this.onLoginFail
+                });
+
+            }
+        },
+        computed: {
+            loginFailed() {
+                return this.loginFailReason != '';
+            },
+        }
+    }
 </script>

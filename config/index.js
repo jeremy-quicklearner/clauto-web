@@ -3,6 +3,16 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const ini = require('ini')
+const fs = require('fs')
+
+
+// Find out what port the local clautod instance is serving the API on so that API calls to the dev server can be redirected
+var localClautodPort = 8080;
+localClautodPort = parseInt(ini.parse(fs.readFileSync('/etc/clauto/clautod/clautod.cfg', 'utf8')).port)
+console.log("\nConnecting to local clautod on port " + localClautodPort)
+if (!localClautodPort)
+    console.log("Failed to read local clautod config. Using port 8080. Is clautod installed?")
 
 module.exports = {
   dev: {
@@ -10,7 +20,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+
+    // Redirect API calls to the local clautod instance
+    proxyTable: {
+      '/api': {
+        target: 'https://localhost:' + localClautodPort,
+        changeOrigin: true,
+        secure: false
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

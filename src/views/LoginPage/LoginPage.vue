@@ -33,13 +33,12 @@
                     password: this.input.password,
                     onFail: this.onLoginFail
                 });
-
             }
         },
         computed: {
             loginFailed() {
                 return this.loginFailReason != '';
-            },
+            }
         }
     }
 </script>

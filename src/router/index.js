@@ -3,8 +3,6 @@ import util from '@/util'
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import store from '@/store'
-
 import LoginPage from '@/views/LoginPage/LoginPage'
 import MainPage from '@/views/MainPage/MainPage'
 import UsersPage from '@/views/UsersPage/UsersPage'
@@ -38,9 +36,6 @@ var nameToTitle = function (name) {
 }
 
 router.beforeEach((to, from, next) => {
-    if (!store.getters['session/isLoggedIn'] && to.path != '/login')
-        next(false);
-
     document.title = nameToTitle(to.name);
     next();
 })

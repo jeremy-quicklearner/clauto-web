@@ -12,6 +12,7 @@
 
 <script>
     import apiUser from '@/api/user'
+    import {mapGetters} from 'vuex'
 
     export default {
         name: 'LoginPage',
@@ -28,17 +29,17 @@
             },
             login() {
                 this.loginFailReason = '';
-                this.$store.dispatch('session/login', {
-                    username: this.input.username,
-                    password: this.input.password,
-                    onFail: this.onLoginFail
-                });
+                apiUser.login(
+                    this.input.username,
+                    this.input.password,
+                    this.onLoginFail
+                )
             }
         },
         computed: {
             loginFailed() {
                 return this.loginFailReason != '';
-            }
-        }
+            },
+        },
     }
 </script>

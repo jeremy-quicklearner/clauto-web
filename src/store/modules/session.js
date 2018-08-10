@@ -1,14 +1,17 @@
-import api from '@/api'
+import apiDispatch from '@/api/dispatch'
+import Cookies from 'js-cookie'
+import jwtDecode from 'jwt-decode'
 
 export default {
     namespaced: true,
     state: {
-        username: '',
+        username: null,
         privilegeLevel: 0,
+        expires: 0
     },
     getters: {
         isLoggedIn(state, getters, rootState) {
-            return (state.username != '')
+            return (state.username !== null)
         },
         username(state, getters, rootState) {
             return state.username;
@@ -16,32 +19,50 @@ export default {
         privilegeLevel(state, getters, rootState) {
             return state.privilegeLevel;
         },
+        expires(state, getters, rootState) {
+            return state.expires;
+        }
     },
     mutations: {
-        setUsername(state, {username}){
+        setUsername(state, username) {
             state.username = username;
         },
-        setPrivilegeLevel(state, {privilegeLevel}){
+        setPrivilegeLevel(state, privilegeLevel) {
             state.privilegeLevel = privilegeLevel;
         },
+        setExpires(state, expires) {
+            state.expires = expires;
+        }
     },
     actions: {
-        async login({commit}, {username, password, onFail}) {
-            var resp;
+        async refresh({commit}) {
             try {
-                resp = await api.post('/user/login', {username: username, password: password})
-                resp = await api.get('/user/me')
-            } catch (error) {
-                onFail(error.response);
+                var claims = jwtDecode(Cookies.get('JWT'));
+                commit('setUsername', claims.username);
+                commit('setPrivilegeLevel', claims.privilege_level);
+                commit('setExpires', claims.exp);
+            } catch (InvalidTokenError) {
+                commit('setUsername', null);
+                commit('setPrivilegeLevel', 0);
+                commit('setExpires', 0);
             }
-
-            commit('setUsername', {username: resp.data.username});
-            commit('setPrivilegeLevel', {privilegeLevel: resp.data.privilege_level});
         },
-        async logout({commit}) {
-            // TODO: Somehow clear the cookie
-            commit('setUsername', '')
-            commit('setPrivilegeLevel', 0)
+
+        async pingRefresh({commit, dispatch}) {
+            try {
+                await apiDispatch.get('/ping_public');
+            } catch(e) {
+                console.log(e);
+                return;
+            }
+            await dispatch('session/refresh');
+        },
+
+        async kill({commit}) {
+            Cookies.set('JWT', null);
+            commit('setUsername', null);
+            commit('setPrivilegeLevel', 0);
+            commit('setExpires', 0);
         }
     }
 }

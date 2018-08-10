@@ -1,20 +1,33 @@
 <template>
     <div>
-        <TheNavbar v-if="showNavbar" />
+        <TheNavbar v-if="isLoggedIn" />
         <router-view/>
     </div>
 </template>
 
 <script>
     import TheNavbar from '@/components/TheNavbar/TheNavbar'
+    import {mapGetters} from 'vuex'
+
+    var onRouteOrSessionChange = function() {
+        if (this.isLoggedIn && this.$route.path == '/login')
+            this.$router.push('/');
+        if (!this.isLoggedIn && this.$route.path != '/login')
+            this.$router.push('/login');
+    }
 
     export default {
         name: 'App',
         components: {TheNavbar},
+        created: onRouteOrSessionChange,
         computed: {
-            showNavbar: function(){
-                return this.$store.getters['session/isLoggedIn'];
-            }
+            ...mapGetters({
+                isLoggedIn: 'session/isLoggedIn'
+            })
+        },
+        watch: {
+            $route: onRouteOrSessionChange,
+            isLoggedIn: onRouteOrSessionChange
         }
     }
 </script>

@@ -6,7 +6,7 @@
             <input type="password" name="password" v-model="input.password" placeholder="Password" />
             <button type="button" v-on:click="login">Login</button>
         </form>
-        <p v-if="loginFailed">Login Failed: {{ loginFailReason }}</p>
+        <p v-if="loginFailed" style="color:red;">Login Failed: {{ loginFailReason }}</p>
     </div>
 </template>
 
@@ -24,8 +24,8 @@
             loginFailReason: ''
         }},
         methods: {
-            onLoginFail(response) {
-                this.loginFailReason = response.data;
+            onLoginFail(result) {
+                this.loginFailReason = result.response.data;
             },
             login() {
                 this.loginFailReason = '';

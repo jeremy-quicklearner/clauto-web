@@ -38,6 +38,7 @@ export default {
         async refresh({commit}) {
             try {
                 var claims = jwtDecode(Cookies.get('JWT'));
+                console.log(claims);
                 commit('setUsername', claims.username);
                 commit('setPrivilegeLevel', claims.privilege_level);
                 commit('setExpires', claims.exp);
@@ -55,7 +56,7 @@ export default {
                 console.log(e);
                 return;
             }
-            await dispatch('session/refresh');
+            await dispatch('refresh');
         },
 
         async kill({commit}) {

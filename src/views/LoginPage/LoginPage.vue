@@ -1,65 +1,31 @@
 <template>
   <div id="LoginPage">
-    <p>Clauto login page</p>
-    <form name="LoginForm">
-      <input
-        v-model="input.username"
-        type="text"
-        name="username"
-        placeholder="Username"
-      >
-      <input
-        v-model="input.password"
-        type="password"
-        name="password"
-        placeholder="Password"
-      >
-      <button
-        type="button"
-        @click="login"
-      >
-        Login
-      </button>
-    </form>
-    <p
-      v-if="loginFailed"
-      style="color:red;"
-    >
-      Login Failed: {{ loginFailReason }}
-    </p>
+    <h1>Login</h1>
+    <Form
+      :name="'Login'"
+      :submitLabel="'Login'"
+      :action="loginAction"
+      :pingAfterAction="false"
+      :refreshAfterAction="false"
+      :clearAfterAction="true"
+      :inputs="[
+        {type: 'text', props:{inputName: 'Username'}},
+        {type: 'text', props:{inputName: 'Password'}}
+      ]"
+    />
   </div>
 </template>
 
 <script>
+import Form from '@/components/form/Form'
 import apiUser from '@/api/user'
 
 export default {
   name: 'LoginPage',
-  data () {
-    return {
-      input: {
-        username: '',
-        password: ''
-      },
-      loginFailReason: ''
-    }
-  },
-  computed: {
-    loginFailed () {
-      return this.loginFailReason !== ''
-    }
-  },
+  components: {Form},
   methods: {
-    onLoginFail (result) {
-      this.loginFailReason = result.response.data
-    },
-    login () {
-      this.loginFailReason = ''
-      apiUser.login(
-        this.input.username,
-        this.input.password,
-        this.onLoginFail
-      )
+    loginAction ({Username, Password}) {
+      return apiUser.login(Username, Password)
     }
   }
 }

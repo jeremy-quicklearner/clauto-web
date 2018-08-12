@@ -4,3 +4,16 @@
   --clauto-green: greenyellow;
   --clauto-gray: gray;
 }
+
+/* UI conventions */
+.error {
+  color: red;
+}
+.error-form {}
+.error-form-input {}
+.error-form-submit {}
+
+.text {}
+.text-invalid {
+  border-color: red;
+}

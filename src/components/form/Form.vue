@@ -3,26 +3,44 @@
     <table
       ref="formTable"
       :id="'Form' + name + 'Table'"
+      class="hcentered"
     />
-    <input
-      :id="'Form' + name + 'Submit'"
-      :value="submitLabel"
-      type="button"
-      @click="submit"
+    <div :class="{'hcenter':horizontalCompact}">
+      <input
+        :id="'Form' + name + 'Submit'"
+        :value="submitLabel"
+        type="button"
+        class="button"
+        @click="submit"
+      >
+    </div>
+    <div
+      v-if="!horizontalCompact"
+      class="error error-form error-form-submit"
     >
-    <span class="error error-form error-form-submit">{{ error }}</span>
+      {{ error }}
+    </div>
+    <div
+      v-if="horizontalCompact"
+      class="error error-form error-form-submit"
+      style="text-align:center; padding-top:10px;"
+    >
+      {{ error }}
+    </div>
   </form>
 </template>
 
 <script>
 import Vue from 'vue'
 import FormInputText from '@/components/form/input/FormInputText'
+import FormInputPassword from '@/components/form/input/FormInputPassword'
 
 export default {
   name: 'Form',
-  components: {FormInputText},
+  components: {FormInputText, FormInputPassword},
   props: {
     name: {type: String, default: 'Form'},
+    horizontalCompact: {type: Boolean, default: false},
     submitLabel: {type: String, default: 'Submit'},
     action: {type: Function, default: async () => {}},
     onSuccess: {type: Function, default: () => {}},
@@ -48,9 +66,13 @@ export default {
   },
   mounted () {
     this.inputComponents = this.inputs.map(input => {
+      var InputClass
       switch (input.type) {
         case 'text':
-          var InputClass = Vue.extend(FormInputText)
+          InputClass = Vue.extend(FormInputText)
+          break
+        case 'password':
+          InputClass = Vue.extend(FormInputPassword)
           break
       }
       var inputComponent = new InputClass({propsData: input.props})

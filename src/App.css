@@ -1,19 +1,124 @@
-/* Clauto branding conventions */
+/* Branding */
 :root {
+  font-family: 'Helvetica';
+
   --clauto-orange: orange;
-  --clauto-green: greenyellow;
+  --clauto-orange-light: rgb(255, 207, 118);
+
+  --clauto-green: green;
+  --clauto-green-light: lightgreen;
+
   --clauto-gray: gray;
+  --clauto-gray-light: lightgray;
 }
 
-/* UI conventions */
+/* Formatting */
+html, body{
+  padding: 0;
+  margin: 0;
+}
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+}
+h1 {
+  color: var(--clauto-gray);
+  margin: 10px;
+}
+
+.page {
+  min-height: 100%;
+  width: 100%;
+  background-color: var(--clauto-orange-light);
+}
+
+.panel {
+  background-color: var(--clauto-orange);
+  padding: 10px;
+}
+
+.hcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hcentered {
+  margin: auto;
+}
+
+.vcentered {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.squeeze {
+  display: inline-block;
+}
+
+/* UI */
 .error {
   color: red;
 }
-.error-form {}
+.error-form {
+  min-height: 20px;
+}
 .error-form-input {}
 .error-form-submit {}
 
-.text {}
+.text {
+  background-color: white;
+  border-color: var(--clauto-gray);
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 0px;
+  padding: 2px;
+  -webkit-appearance: none;
+}
 .text-invalid {
+  border-color: red;
+}
+.text-correcting {
+  border-color: yellow;
+}
+.text:focus {
+  background-color: var(--clauto-green-light);
+  outline: 0px;
+}
+
+.label {}
+.label-input {
+  font-weight: bold;
+}
+
+.button {
+  background-color: var(--clauto-green);
+  border-color: var(--clauto-gray);
+  color: var(--clauto-gray-light);
+  font-weight: bolder;
+  padding: 10px 20px;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+.button:hover {
+  border-color: var(--clauto-gray-light);
+}
+.button:active {
+  background-color: var(--clauto-green-light);
+  color: var(--clauto-gray);
+}
+.button:focus {
+  border-color: var(--clauto-gray-light);
+  outline: 0px;
+}
+
+/* Temporary style to test with */
+.test {
+  background-color: lightgray;
   border-color: red;
 }

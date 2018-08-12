@@ -19,7 +19,7 @@
         :style="'width:' + width + ';'"
         :placeholder="inputName"
         :name="name"
-        type="text"
+        type="password"
       >
       <div
         v-if="horizontalCompact"
@@ -40,7 +40,7 @@
 <script>
 export default {
   props: {
-    inputName: {type: String, default: 'Text'},
+    inputName: {type: String, default: 'Password'},
     horizontalCompact: {type: Boolean, default: false},
     width: {type: String, default: '200px'},
     canBeBlank: {type: Boolean, default: false},
@@ -48,7 +48,7 @@ export default {
   },
   data () {
     return {
-      name: 'FormInputText',
+      name: 'FormInputPassword',
       input: '',
       error: '',
       correcting: false
@@ -62,7 +62,7 @@ export default {
     }
   },
   created () {
-    this.name = 'FormInputText' + this.inputName
+    this.name = 'FormInputPassword' + this.inputName
   },
   methods: {
     check () {

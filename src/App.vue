@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height:100%; display:flex;">
     <TheNavbar v-if="isLoggedIn" />
     <router-view/>
   </div>

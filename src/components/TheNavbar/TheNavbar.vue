@@ -1,5 +1,9 @@
 <template>
-  <div id="TheNavbar">
+  <div
+    id="TheNavbar"
+    class="panel"
+    style="z-index: 100; position: fixed; width: 100%"
+  >
     <router-link
       to="/"
       @click.native="onClick"

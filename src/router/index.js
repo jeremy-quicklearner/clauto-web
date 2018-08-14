@@ -1,5 +1,3 @@
-import util from '@/util'
-
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -26,19 +24,6 @@ var router = new Router({
     }
   ],
   mode: 'history'
-})
-
-var nameToTitle = function (name) {
-  if (util.isDev()) {
-    return '[DEV] ' + name
-  } else {
-    return name
-  }
-}
-
-router.beforeEach((to, from, next) => {
-  document.title = nameToTitle(to.name)
-  next()
 })
 
 export default router

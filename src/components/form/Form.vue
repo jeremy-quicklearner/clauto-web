@@ -1,11 +1,12 @@
 <template>
   <form :id="'Form' + name">
-    <table
-      ref="formTable"
-      :id="'Form' + name + 'Table'"
-      class="hcentered"
-    />
     <div :class="{'hcenter':horizontalCompact}">
+      <table
+        ref="formTable"
+        :id="'Form' + name + 'Table'"
+      />
+    </div>
+    <div :class="{'hcenter': horizontalCompact}">
       <input
         :id="'Form' + name + 'Submit'"
         :value="submitLabel"
@@ -13,12 +14,12 @@
         class="button"
         @click="submit"
       >
-    </div>
-    <div
-      v-if="!horizontalCompact"
-      class="error error-form error-form-submit"
-    >
-      {{ error }}
+      <span
+        v-if="!horizontalCompact"
+        class="error error-form error-form-submit"
+      >
+        {{ error }}
+      </span>
     </div>
     <div
       v-if="horizontalCompact"

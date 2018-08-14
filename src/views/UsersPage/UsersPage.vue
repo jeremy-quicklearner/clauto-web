@@ -1,6 +1,11 @@
 <template>
-  <div id="UsersPage">
-    <p>Clauto users page</p>
+  <div
+    id="UsersPage"
+    class="page-navved"
+  >
+    <div>
+      <h1>Clauto users page</h1>
+    </div>
   </div>
 </template>
 

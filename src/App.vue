@@ -3,7 +3,7 @@
     id="app"
     class="app"
   >
-    <TheNavbar v-if="isLoggedIn" />
+    <TheNavbar/>
     <ThePageWiper ref="ThePageWiper"/>
     <router-view/>
   </div>
@@ -11,8 +11,8 @@
 
 <script>
 import util from '@/util'
-import TheNavbar from '@/components/TheNavbar/TheNavbar'
-import ThePageWiper from '@/components/ThePageWiper/ThePageWiper'
+import TheNavbar from '@/components/The/TheNavbar/TheNavbar'
+import ThePageWiper from '@/components/The/ThePageWiper/ThePageWiper'
 import {mapGetters} from 'vuex'
 
 export default {

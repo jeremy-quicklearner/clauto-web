@@ -58,7 +58,7 @@ export default {
       await dispatch('refresh')
     },
     async kill ({commit}) {
-      Cookies.set('JWT', null)
+      Cookies.remove('JWT')
       commit('setUsername', null)
       commit('setPrivilegeLevel', 0)
       commit('setExpires', 0)

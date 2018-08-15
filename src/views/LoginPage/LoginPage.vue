@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Form from '@/components/form/Form'
+import Form from '@/components/Form/Form'
 import apiUser from '@/api/user'
 
 export default {

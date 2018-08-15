@@ -33,8 +33,8 @@
 
 <script>
 import Vue from 'vue'
-import FormInputText from '@/components/form/input/FormInputText'
-import FormInputPassword from '@/components/form/input/FormInputPassword'
+import FormInputText from '@/components/Form/FormInput/FormInputText'
+import FormInputPassword from '@/components/Form/FormInput/FormInputPassword'
 
 export default {
   name: 'Form',

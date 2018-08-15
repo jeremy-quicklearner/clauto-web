@@ -43,8 +43,8 @@ h1 {
 
 .page-navved {
   position: absolute;
-  left: 50px;
-  top: 50px;
+  left: 120px;
+  top: 66px;
 }
 
 .panel {
@@ -118,4 +118,37 @@ h1 {
 .button:focus {
   border-color: var(--clauto-gray-light);
   outline: 0px;
+}
+
+.navButton {
+  background-color: var(--clauto-orange);
+  border-color: var(--clauto-gray);
+  color: var(--clauto-green);
+  font-weight: bolder;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 0;
+  -webkit-appearance: none;
+  float: right;
+  position: relative;
+  left: 5px;
+}
+.navButton:hover {
+  background-color: var(--clauto-orange-light);
+  border-color: var(--clauto-green);
+}
+.navButton:active {
+  background-color: var(--clauto-green-light);
+  color: var(--clauto-gray);
+}
+.navButton:focus {
+  outline: 0px;
+}
+.navButton:disabled {
+  background-color: var(--clauto-orange-light);
+  border-right-width: 0;
+  padding-right: 15px;
 }

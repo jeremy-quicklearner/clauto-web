@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import LoginPage from '@/views/LoginPage/LoginPage'
-import MainPage from '@/views/MainPage/MainPage'
-import UsersPage from '@/views/UsersPage/UsersPage'
+import LoginPage from '@/views/LoginPage'
+import MainPage from '@/views/MainPage'
+import UsersPage from '@/views/UsersPage'
 
 Vue.use(Router)
 

@@ -11,8 +11,8 @@
 
 <script>
 import util from '@/util'
-import TheNavbar from '@/components/The/TheNavbar/TheNavbar'
-import ThePageWiper from '@/components/The/ThePageWiper/ThePageWiper'
+import TheNavbar from '@/components/The/Navbar/TheNavbar'
+import ThePageWiper from '@/components/The/ThePageWiper'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -27,6 +27,12 @@ export default {
     $route () { this.onRouteOrSessionChange() },
     isLoggedIn () { this.onRouteOrSessionChange() }
   },
+  created () {
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize)
+  },
   mounted () {
     this.$router.beforeEach((to, from, next) => {
       document.title = util.nameToTitle(to.name)
@@ -40,6 +46,7 @@ export default {
     })
 
     this.onRouteOrSessionChange()
+    this.onResize()
   },
   methods: {
     onRouteOrSessionChange () {
@@ -49,6 +56,13 @@ export default {
       if (!this.isLoggedIn && this.$route.path !== '/login') {
         this.$router.push('/login')
       }
+    },
+    onResize (event) {
+      this.$store.dispatch(
+        'viewport/update',
+        document.documentElement.clientWidth,
+        document.documentElement.clientHeight
+      )
     }
   }
 }

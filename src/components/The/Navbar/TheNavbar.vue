@@ -16,33 +16,18 @@
         />
       </div>
     </transition>
-    <transition name="panel-navbar-left">
-      <div
-        v-if="isLoggedIn"
-        id="TheNavbarLeft"
-        class="panel panel-navbar-left"
-      >
-        <TheNavbarButton
-          button-text="Main Page"
-          dest-path="/"
-        />
-        <TheNavbarButton
-          button-text="Users"
-          dest-path="/users"
-        />
-      </div>
-    </transition>
+    <TheNavbarLeft/>
   </span>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import TheNavbarLeft from '@/components/The/Navbar/TheNavbarLeft'
 import ControlButton from '@/components/Control/ControlButton'
-import TheNavbarButton from '@/components/The/TheNavbar/TheNavbarButton/TheNavbarButton'
 
 export default {
   name: 'TheNavbar',
-  components: {TheNavbarButton, ControlButton},
+  components: {TheNavbarLeft, ControlButton},
   data () {
     return {
       links: []
@@ -80,10 +65,12 @@ export default {
 }
 
 .panel-navbar-left {
-  position: relative;
+  position: absolute;
+  top: 0;
   height: 100vh;
   width: 100px;
   padding-right: 0;
+  padding-top: 80px;
   border-right-width: 5px;
   border-right-style: solid;
   border-right-color: var(--clauto-gray);
@@ -93,6 +80,6 @@ export default {
   left: 0;
 }
 .panel-navbar-left-enter, .panel-navbar-left-leave-to {
-  left: -100vh;
+  left: -120px;
 }
 </style>

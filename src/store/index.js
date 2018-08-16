@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import vuexPersistedState from 'vuex-persistedstate'
 import Cookies from 'js-cookie'
 
-import session from './modules/session'
+import session from '@/store/modules/session'
+import viewport from '@/store/modules/viewport'
 
 Vue.use(Vuex)
 
@@ -20,11 +21,15 @@ export default new Vuex.Store({
       paths: [
         'session.username',
         'session.privilegeLevel',
-        'session.expires'
+        'session.expires',
+
+        'viewport.width',
+        'viewport.height'
       ]
     })
   ],
   modules: {
-    session
+    session,
+    viewport
   }
 })

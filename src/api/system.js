@@ -1,4 +1,4 @@
-import api from './index'
+import api from '.'
 
 export default {
   ping_public (username, password, onFail) {
@@ -15,5 +15,8 @@ export default {
   },
   ping_slow (username, password, onFail) {
     return api.post('/ping_slow', {}, undefined, onFail)
+  },
+  sysname (onFail) {
+    return api.get('/sysname', {}, undefined, onFail).then((r) => { return r.data })
   }
 }

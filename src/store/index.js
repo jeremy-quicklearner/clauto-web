@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import vuexPersistedState from 'vuex-persistedstate'
 import Cookies from 'js-cookie'
 
+import system from '@/store/modules/system'
 import session from '@/store/modules/session'
 import viewport from '@/store/modules/viewport'
 
@@ -19,6 +20,8 @@ export default new Vuex.Store({
         removeItem: key => Cookies.remove(key)
       },
       paths: [
+        'system.name',
+
         'session.username',
         'session.privilegeLevel',
         'session.expires',
@@ -29,6 +32,7 @@ export default new Vuex.Store({
     })
   ],
   modules: {
+    system,
     session,
     viewport
   }

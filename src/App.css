@@ -119,3 +119,20 @@ h1 {
   border-color: var(--clauto-gray-light);
   outline: 0px;
 }
+
+.panel-navbar-top {
+  z-index: 110;
+  position: relative;
+  width: 100vw;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--clauto-gray);
+  overflow: auto;
+}
+.panel-navbar-top-enter-active, .panel-navbar-top-leave-active {
+  transition: top 1s;
+  top: 0;
+}
+.panel-navbar-top-enter, .panel-navbar-top-leave-to {
+  top: -100px;
+}
